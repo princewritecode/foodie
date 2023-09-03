@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 
 function Body() {
     const [ListOfRestaurant, setListOfRestaurant] = useState([]);
+    const [FilteredList, setFilteredList] = useState([]);
+    const [searchText, setSearchText] = useState("");
+
     useEffect(() => {
         console.log("use effect called");
         fetchData();
@@ -11,17 +14,18 @@ function Body() {
     const fetchData = async () => {
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.7195687&lng=75.8577258&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
         const jsonData = await data.json();
-        setListOfRestaurant(jsonData?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-        console.log(ListOfRestaurant);
+        setListOfRestaurant(jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setFilteredList(jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     };
 
-
+    if (ListOfRestaurant.length === 0) {
+        return <h1>Loading...</h1>;
+    }
     return (
-
         <>
             <button className="topRated" onClick={() => {
                 const filteredList = ListOfRestaurant.filter((res) => {
-                    return res.data.avgRating > 4;
+                    return res.info.avgRating > 4;
                 });
                 setListOfRestaurant(filteredList);
             }
@@ -32,18 +36,29 @@ function Body() {
                     type="text"
                     className="search-input"
                     placeholder="Search a restaurant you want..."
+                    value={searchText}
+                    onChange={(e) => { setSearchText(e.target.value); }}
                 ></input>
                 <button
-                    className="search-btn"
+                    className="search-btn" onClick={() => {
+                        const filterListGenerated = ListOfRestaurant.filter((res) => {
+                            return res.info.name.toLowerCase().includes(searchText.toLowerCase());
+                        }
+                        );
+                        setFilteredList(filterListGenerated);
+                    }
+                    }
                 >
                     Search
                 </button>
-            </div>
+            </div >
             <div className="restaurant-list">
 
                 {
-                    ListOfRestaurant.map((res) => {
+                    FilteredList.map((res) => {
+
                         return <RestaurantCard key={res.id} {...res.info}></RestaurantCard>;
+
                     })
                 }
 
