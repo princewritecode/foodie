@@ -1,6 +1,6 @@
 import RestaurantCard from "../Components/RestaurantCard";
 import { useState, useEffect } from "react";
-
+import { Link } from "react-router-dom";
 
 function Body() {
     const [ListOfRestaurant, setListOfRestaurant] = useState([]);
@@ -57,7 +57,7 @@ function Body() {
                 {
                     FilteredList.map((res) => {
 
-                        return <RestaurantCard key={res.id} {...res.info}></RestaurantCard>;
+                        return <Link key={res.info.id} to={"/restaurants/" + res.info.id}><RestaurantCard  {...res.info}></RestaurantCard></Link>;
 
                     })
                 }
