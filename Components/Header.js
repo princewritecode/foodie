@@ -1,5 +1,5 @@
 import FoodFireLogo from "../Images/Food Fire Logo.png";
-
+import { Link } from "react-router-dom";
 const Title = () => (
     <a href="/">
         <img className="logo" src={FoodFireLogo} alt="Food Fire Logo" />
@@ -13,9 +13,9 @@ function Header() {
                 <Title></Title>
                 <div className="nav-items">
                     <ul>
-                        <li>Home</li>
-                        <li>About</li>
-                        <li>Contact</li>
+                        <Link to="/" > <li>Home</li></Link>
+                        <Link to="/about"><li>About</li></Link>
+                        <Link to="contact"><li>Contact</li></Link>
                         <li>
                             <i className="fa-solid fa-cart-shopping"></i>
                         </li>
