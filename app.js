@@ -2,23 +2,28 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./Components/Header";
 import Body from "./Components/Body";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Contact from "./Components/Contact";
 import About from "./Components/About";
+import Error from "./Components/Error";
 function AppLayOut() {
     return (
         <>
             <Header></Header>
-            <Body></Body>
+            <Outlet> </Outlet>
         </>
     );
 }
 
 const appRouter = createBrowserRouter(
     [
-        { path: "/", element: <AppLayOut></AppLayOut> },
-        { path: "/about", element: <About></About> },
-        { path: "/contact", element: <Contact></Contact> }
+        {
+            path: "/", element: <AppLayOut></AppLayOut>, children: [
+                { path: "/", element: <Body></Body> },
+                { path: "/about", element: <About></About> },
+                { path: "/contact", element: <Contact></Contact> }
+            ], errorElement: <Error></Error>
+        }
     ]
 );
 
