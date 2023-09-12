@@ -8,6 +8,7 @@ const Title = () => (
 );
 
 function Header() {
+    const onlineStatus = useOnlineStatus();
     return (
         <>
             <div className="header">
@@ -20,7 +21,7 @@ function Header() {
                         <li>
                             <i className="fa-solid fa-cart-shopping"></i>
                         </li>
-                        <li>Online status:{useOnlineStatus ? "✅" : "🔴"}</li>
+                        <li>Online status:{onlineStatus ? "✅" : "🔴"}</li>
                     </ul>
                 </div>
             </div>
