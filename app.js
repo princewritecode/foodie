@@ -15,7 +15,6 @@ function AppLayOut() {
         </>
     );
 }
-
 const appRouter = createBrowserRouter(
     [
         {

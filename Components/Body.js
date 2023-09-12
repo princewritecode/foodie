@@ -1,12 +1,11 @@
 import RestaurantCard from "../Components/RestaurantCard";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import useOnlineStatus from "../utils/useOnlineStatus";
 function Body() {
     const [ListOfRestaurant, setListOfRestaurant] = useState([]);
     const [FilteredList, setFilteredList] = useState([]);
     const [searchText, setSearchText] = useState("");
-
     useEffect(() => {
         console.log("use effect called");
         fetchData();
@@ -17,6 +16,10 @@ function Body() {
         setListOfRestaurant(jsonData?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         setFilteredList(jsonData?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     };
+
+    const onlineStatus = useOnlineStatus();
+
+    if (onlineStatus === false) return <h1>Looks like you are offline please check your internet connection</h1>;
 
     if (ListOfRestaurant.length === 0) {
         return <h1>Loading...</h1>;

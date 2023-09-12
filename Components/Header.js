@@ -1,5 +1,6 @@
 import FoodFireLogo from "../Images/Food Fire Logo.png";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 const Title = () => (
     <a href="/">
         <img className="logo" src={FoodFireLogo} alt="Food Fire Logo" />
@@ -19,6 +20,7 @@ function Header() {
                         <li>
                             <i className="fa-solid fa-cart-shopping"></i>
                         </li>
+                        <li>Online status:{useOnlineStatus ? "✅" : "🔴"}</li>
                     </ul>
                 </div>
             </div>
