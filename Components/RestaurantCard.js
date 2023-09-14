@@ -3,9 +3,9 @@ const IMG_CDN_URL =
 function RestaurantCard({ cloudinaryImageId, name, cuisines, avgRating, lastMileTravelString, costForTwoString, areaName, id }
 ) {
     return (
-        <div className="card">
-            <img src={IMG_CDN_URL + cloudinaryImageId} />
-            <h2>{name}</h2>
+        <div className="m-4 p-4 w-[250px] rounded-lg bg-gray-200 hover:bg-gray-400">
+            <img src={IMG_CDN_URL + cloudinaryImageId} className="rounded-md" />
+            <h2 className="font-bold py-4 text-lg">{name}</h2>
             <h2>{id}</h2>
             <h5>{cuisines.join(" , ")}</h5>
             <h6>{areaName}</h6>
